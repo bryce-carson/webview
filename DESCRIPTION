@@ -1,0 +1,12 @@
+Package: webview
+Title: "SWIG-generated R binding to webview: packaged."
+Version: 0.0.0.9001
+Authors@R: 
+    person("Bryce", "Carson", , "bryce.a.carson@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1362-2998"))
+Description: Provides a binding to webview as an package.
+License: MIT + file LICENSE
+SystemRequirements: CMake (>= 3.12), SWIG (>= 4.0), GTK4 and WebKitGTK(Linux only, e.g. libgtk-4-dev, libwebkitgtk-6.0-dev on Ubuntu)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

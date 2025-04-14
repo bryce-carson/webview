@@ -1,0 +1,12 @@
+PKG_CFLAGS=
+PKG_LIBS=
+
+# Use CMake to build the shared library
+all:
+	@mkdir -p ../libs
+	@mkdir -p build && cd build && cmake .. -G "MinGW Makefiles" && cmake --build . --target install
+	@rm -rf build
+
+clean:
+	@rm -rf build
+	@rm -rf ../libs/webview.*
