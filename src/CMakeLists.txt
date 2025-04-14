@@ -1,30 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 project(webview LANGUAGES C CXX)
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) # enable position-independent code for shared libraries
 
-find_program(R_EXECUTABLE R)
-if(NOT R_EXECUTABLE)
-  message(FATAL_ERROR "GNU R was not found in any PATH directory.")
-endif()
-
-# Get R include directories and libraries
-execute_process(
-  COMMAND ${R_EXECUTABLE} CMD config --cppflags
-  OUTPUT_VARIABLE R_INCLUDE_FLAGS
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-execute_process(
-  COMMAND ${R_EXECUTABLE} CMD config --ldflags
-  OUTPUT_VARIABLE R_LIBRARY_FLAGS
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-
-# Parse the R include flags
-string(REGEX REPLACE "^-I" "" R_INCLUDE_DIR "${R_INCLUDE_FLAGS}")
-string(STRIP "${R_INCLUDE_DIR}" R_INCLUDE_DIR)
+R_INCLUDE_DIR)
 
 # Find SWIG
 find_package(SWIG 4.0 REQUIRED)
@@ -81,10 +62,4 @@ install(TARGETS webview
   RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/../libs  # For Windows DLLs
 )
 
-# Copy the generated webview.R file to the R/ directory
-set(SWIG_R_FILE "${CMAKE_CURRENT_BINARY_DIR}/webview.R")
-if(EXISTS "${SWIG_R_FILE}")
-  file(COPY "${SWIG_R_FILE}" DESTINATION "${CMAKE_SOURCE_DIR}/../R/")
-else()
-  message(WARNING "webview.R not found in ${CMAKE_CURRENT_BINARY_DIR}. Did SWIG fail in generating it?")
-endif()
+install(FILES "${CMAKE_SOURCE_DIR}/build/webview.R" DESTINATION ${CMAKE_SOURCE_DIR}/../R)

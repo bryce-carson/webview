@@ -4,10 +4,26 @@ PKG_LIBS=
 # Use CMake to build the shared library
 all:
 	@mkdir -p ../libs
-	@mkdir -p build && cd build && cmake ../ && cmake --build . --target install
+	@mkdir -p build && cd build && cmake ../ && cmake --build . --target install --verbose
 	@rm -rf build
 
 clean:
 	@rm -rf build
 	@rm -rf ../libs/webview.so
 	@rm -rf ../libs/webview.R
+
+## This is example code from the R Extensions manual
+# PKG_CPPFLAGS = -Ilibs/include
+# PKG_LIBS = libs/libmyLib.a
+#
+# $(SHLIB): mylibs
+#
+# mylibs:
+#         (cd libs; \
+#           CC="$(CC)" CFLAGS="$(CFLAGS)" \
+#           CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" \
+#           cmake . \
+#             -DCMAKE_BUILD_TYPE=Release \
+#             -DBUILD_SHARED_LIBS:bool=OFF \
+#             -DCMAKE_POSITION_INDEPENDENT_CODE:bool=ON; \
+#           $(MAKE))
