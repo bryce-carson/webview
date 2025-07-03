@@ -6,5 +6,5 @@ Authors@R:
            comment = c(ORCID = "0000-0002-1362-2998"))
 Description: Provides a binding to webview as an package.
 License: MIT + file LICENSE
-SystemRequirements: CMake (>= 3.12), SWIG (>= 4.0), GTK4 and WebKitGTK(Linux only, e.g. libgtk-4-dev, libwebkitgtk-6.0-dev on Ubuntu)
+SystemRequirements: CMake (>= 3.12), SWIG (>= 4.0), GTK4 and WebKitGTK (on Linux only; e.g. libgtk-4-dev and libwebkitgtk-6.0-dev on Ubuntu, or gtk4-devel and webkitgtk6.0-devel on Fedora).
 Encoding: UTF-8
